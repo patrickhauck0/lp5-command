@@ -18,8 +18,29 @@ class UsuarioTest {
 
     @Test
     void deveLigarTV() {
-        Comando aberturaSemestre = new ComandoLigarTV(input);
-        usuario.executarComando(aberturaSemestre);
+        Comando ligarTV = new ComandoLigarTV(input);
+        usuario.executarComando(ligarTV);
+
+        assertEquals("TV ligada", input.getSituacao());
+    }
+
+    @Test
+    void deveDesligarTV() {
+        Comando desligarTV = new ComandoDesligarTV(input);
+        usuario.executarComando(desligarTV);
+
+        assertEquals("TV desligada", input.getSituacao());
+    }
+
+    @Test
+    void deveCancelarDesligarTV() {
+        Comando ligarTV = new ComandoLigarTV(input);
+        Comando desligarTV = new ComandoDesligarTV(input);
+
+        usuario.executarComando(ligarTV);
+        usuario.executarComando(desligarTV);
+
+        usuario.cancelarUltimoComando();
 
         assertEquals("TV ligada", input.getSituacao());
     }
